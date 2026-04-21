@@ -22,7 +22,7 @@ public class CheckboxesTest {
 
         //проверка статуса первого чекбокса
         boolean isCheck = driver.findElements(By.cssSelector("[type=checkbox]")).get(0).isSelected();
-        Assert.assertFalse(isCheck);
+        softAssert.assertFalse(isCheck);
 
         //изменение статуса первого чекбокса и проверка
         driver.findElements(By.cssSelector("[type=checkbox]")).get(0).click();

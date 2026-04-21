@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 import java.util.List;
@@ -16,6 +17,7 @@ public class DropDownTest {
     public void dropDownCheck() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
+        SoftAssert softAssert = new SoftAssert();
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://the-internet.herokuapp.com/dropdown");
@@ -24,7 +26,7 @@ public class DropDownTest {
 
         Select select = new Select(webElement);
         List<WebElement> elements = select.getOptions();
-        Assert.assertEquals(elements.size(), 3);
+        softAssert.assertEquals(elements.size(), 3);
 
         WebElement element = elements.get(1);
         String value = element.getAttribute("value");

@@ -28,8 +28,8 @@ public class TyposTest {
             text = driver.findElement(By.xpath("(//p)[2]")).getText();
             i++;
             Thread.sleep(1000);
+            softAssert.assertEquals(text, "Sometimes you'll see a typo, other times you won't.");
         }
-        softAssert.assertEquals(text, "Sometimes you'll see a typo, other times you won't.");
         driver.quit();
         softAssert.assertAll();
     }
