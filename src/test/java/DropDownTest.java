@@ -31,13 +31,14 @@ public class DropDownTest {
         WebElement element = elements.get(1);
         String value = element.getAttribute("value");
         select.selectByValue(value);
-        Assert.assertEquals(select.getFirstSelectedOption().getText(), "Option 1");
+        softAssert.assertEquals(select.getFirstSelectedOption().getText(), "Option 1");
 
         element = elements.get(2);
         value = element.getAttribute("value");
         select.selectByValue(value);
-        Assert.assertEquals(select.getFirstSelectedOption().getText(), "Option 2");
+        softAssert.assertEquals(select.getFirstSelectedOption().getText(), "Option 2");
 
         driver.quit();
+        softAssert.assertAll();
     }
 }

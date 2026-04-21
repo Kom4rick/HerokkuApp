@@ -27,8 +27,9 @@ public class AddRemoveElementTest {
 
         driver.findElement(By.xpath("//button[text()='Delete']")).click();
         int size1 = driver.findElements(By.xpath("//button[text()='Delete']")).size();
-        Assert.assertEquals(size1, 1);
+        softAssert.assertEquals(size1, 1);
 
         driver.quit();
+        softAssert.assertAll();
     }
 }

@@ -27,17 +27,18 @@ public class CheckboxesTest {
         //изменение статуса первого чекбокса и проверка
         driver.findElements(By.cssSelector("[type=checkbox]")).get(0).click();
         boolean isCheck1 = driver.findElements(By.cssSelector("[type=checkbox]")).get(0).isSelected();
-        Assert.assertTrue(isCheck1);
+        softAssert.assertTrue(isCheck1);
 
         //проверка второго чекбокса
         boolean isCheck2 = driver.findElements(By.cssSelector("[type=checkbox]")).get(1).isSelected();
-        Assert.assertTrue(isCheck2);
+        softAssert.assertTrue(isCheck2);
 
         //изменение статуса второго чекбокса и проверка
         driver.findElements(By.cssSelector("[type=checkbox]")).get(1).click();
         boolean isCheck3 = driver.findElements(By.cssSelector("[type=checkbox]")).get(1).isSelected();
-        Assert.assertFalse(isCheck3);
+        softAssert.assertFalse(isCheck3);
 
         driver.quit();
+        softAssert.assertAll();
     }
 }
