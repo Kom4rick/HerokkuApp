@@ -18,6 +18,7 @@ public class ContextMenuTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(options);
+        SoftAssert softAssert = new SoftAssert();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://the-internet.herokuapp.com/context_menu");
 
@@ -25,8 +26,9 @@ public class ContextMenuTest {
         Actions actions = new Actions(driver);
         actions.contextClick(element).perform();
         Alert alert = driver.switchTo().alert();
-        Assert.assertEquals(alert.getText(), "You selected a context menu");
+        softAssert.assertEquals(alert.getText(), "You selected a context menu");
         alert.accept();
         driver.quit();
+        softAssert.assertAll();
     }
 }
