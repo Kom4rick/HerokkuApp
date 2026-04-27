@@ -21,18 +21,20 @@ public class DynamicControlsTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(options);
+        SoftAssert softAssert = new SoftAssert();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
 
         driver.findElement(By.xpath("//button[text()='Remove']")).click();
-        assertEquals(driver.findElement(By.xpath("//*[text() = \"It's gone!\"]")).getText(), "It's gone!");
-        assertTrue(driver.findElements(By.xpath("//*[text() = \" A checkbox\"]")).isEmpty());
+        softAssert.assertEquals(driver.findElement(By.xpath("//*[text() = \"It's gone!\"]")).getText(), "It's gone!");
+        softAssert.assertTrue(driver.findElements(By.xpath("//*[text() = \" A checkbox\"]")).isEmpty());
 
-        Assert.assertFalse(driver.findElement(By.cssSelector("[type='text']")).isEnabled());
+        softAssert.assertFalse(driver.findElement(By.cssSelector("[type='text']")).isEnabled());
         driver.findElement(By.xpath("//button[text()='Enable']")).click();
-        assertEquals(driver.findElement(By.xpath("//*[text() = \"It's enabled!\"]")).getText(), "It's enabled!");
-        assertTrue(driver.findElement(By.cssSelector("[type='text']")).isEnabled());
+        softAssert.assertEquals(driver.findElement(By.xpath("//*[text() = \"It's enabled!\"]")).getText(), "It's enabled!");
+        softAssert.assertTrue(driver.findElement(By.cssSelector("[type='text']")).isEnabled());
 
         driver.quit();
+        softAssert.assertAll();
     }
 }

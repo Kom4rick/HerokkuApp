@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.io.File;
 import java.time.Duration;
@@ -23,6 +24,7 @@ public class FileDownloadTest {
         options.addArguments("--start-maximized");
         options.setExperimentalOption("prefs", chromePrefs);
         WebDriver driver = new ChromeDriver(options);
+        SoftAssert softAssert = new SoftAssert();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://the-internet.herokuapp.com/download");
@@ -42,9 +44,10 @@ public class FileDownloadTest {
                 }
             }
         }
-        assertTrue(found, "Downloaded document is not found");
+        softAssert.assertTrue(found, "Downloaded document is not found");
         f.deleteOnExit();
 
         driver.quit();
+        softAssert.assertAll();
     }
 }
